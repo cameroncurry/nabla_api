@@ -2,7 +2,8 @@
 
 INSTALLED_APPS = [
     '...',
-    'nabla_api',
+    'nabla_api.apps.NablaApiConfig',
+    'rest_framework',
     '...'
 ]
 
