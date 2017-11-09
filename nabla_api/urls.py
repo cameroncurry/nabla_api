@@ -3,9 +3,9 @@
 #
 
 from django.conf.urls import url
-from . import views
+from .views import QTAccountView
 
 
 urlpatterns = [
-    url(r'nabla_api$', views.nabla_api)
+    url(r'qt_accounts$', QTAccountView.as_view())
 ]

@@ -2,8 +2,13 @@
 # Copyright Cameron Curry (c) 2017
 #
 
-from django.http.response import HttpResponse
+from rest_framework import generics
+from nabla_core.models import QTAccount
+from .serializers import QTAccountSerializer
 
 
-def nabla_api(request):
-    return HttpResponse('hello from nabla_api')
+class QTAccountView(generics.ListAPIView):
+
+    queryset = QTAccount.objects.all()
+    serializer_class = QTAccountSerializer
+
