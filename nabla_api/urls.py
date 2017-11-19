@@ -10,7 +10,7 @@ from .views import QTActivityView
 
 
 urlpatterns = [
-    url(r'qt_access$', QTAccessView.as_view()),
-    url(r'qt_account$', QTAccountView.as_view()),
-    url(r'qt_activity$', QTActivityView.as_view()),
+    url(r'qt-access$', QTAccessView.as_view()),
+    url(r'qt-account$', QTAccountView.as_view()),
+    url(r'qt-activity$', QTActivityView.as_view()),
 ]
