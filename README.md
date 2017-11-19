@@ -1,4 +1,4 @@
-# nabla_api
+# nabla_api [![Known Vulnerabilities](https://snyk.io/test/github/cameroncurry/nabla_api/badge.svg)](https://snyk.io/test/github/cameroncurry/nabla_api)
 
 INSTALLED_APPS = [
     '...',
