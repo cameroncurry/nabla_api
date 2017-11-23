@@ -5,7 +5,8 @@
 from setuptools import setup, find_packages
 
 install_requires = [
-    'Django>=1.11.0'
+    'Django>=1.11.0',
+    'djangorestframework>=3.7.0'
 ]
 
 setup(

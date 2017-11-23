@@ -1,6 +1,7 @@
 SECRET_KEY = 'fake-key'
 INSTALLED_APPS = [
-    "nabla_api",
+    'nabla_core',
+    'nabla_api',
 ]
 
 DATABASES = {
