@@ -15,4 +15,5 @@ setup(
     description='API module for the Nabla project.',
     install_requires=install_requires,
     packages=find_packages(),
+    test_suite='runtests.runtests'
 )
