@@ -24,6 +24,13 @@ class QTAccessView(GenericAPIView,
                    mixins.RetrieveModelMixin,
                    mixins.ListModelMixin,
                    mixins.DestroyModelMixin):
+    """
+    Methods:
+        GET: Retrieve QTAccess list
+        PUT: Update QTAccess
+        POST: Create QTAccess
+        DELETE: Delete QTAccess
+    """
 
     queryset = QTAccess.objects.all()
     serializer_class = QTAccessSerializer
@@ -39,6 +46,24 @@ class QTAccessView(GenericAPIView,
         qt_access = QTAccessService.refresh_and_save_qt_access(qt_access)
         return Response(QTAccessSerializer(qt_access).data, status.HTTP_200_OK)
 
+    def post(self, request, *args, **kwargs):
+        if 'scope' not in request.data or 'refresh_token' not in request.data:
+            response_data = {
+                'scope': ['This Field is Required'],
+                'refresh_token': ['This Field is Required']
+            }
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+        if not QTAccess.is_valid_scope(request.data['scope']):
+            response_data = {
+                'scope': ['Not accepted, use ACC/MKT/ODR']
+            }
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+        qt_access = QTAccess.objects.create(scope=request.data['scope'],
+                                            refresh_token=request.data['refresh_token'])
+        return Response(QTAccessSerializer(qt_access).data, status.HTTP_201_CREATED)
+
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -53,4 +78,7 @@ class QTActivityView(ListAPIView):
 
     queryset = QTActivity.objects.all()
     serializer_class = QTActivitySerializer
+
+
+
 

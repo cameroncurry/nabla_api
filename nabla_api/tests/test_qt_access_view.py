@@ -47,6 +47,33 @@ class TestQTAccessView(APITestCase):
             with self.subTest(result=result):
                 self.assertEqual(result, expected)
 
+    def test_post(self):
+        data = {
+            'scope': 'ACC',
+            'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F'
+        }
+        response = self.client.post('/api/qt-access', data)
+        qt_access = QTAccess.objects.get(pk=response.data['id'])
+        print(qt_access.scope)
+        expected_response = (
+            (response.status_code, 201),
+            (response.data['scope'], 'ACC'),
+            (response.data['refresh_token'], 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F'),
+            (qt_access.scope, 'ACC'),
+            (qt_access.refresh_token, 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F')
+        )
+        for result, expected in expected_response:
+            with self.subTest(result=result):
+                self.assertEqual(result, expected)
+
+    def test_post_failed(self):
+        response = self.client.post('/api/qt-access', {})
+        self.assertEqual(response.status_code, 400)
+
+        response = self.client.post('/api/qt-access', {'scope': 'XYZ',
+                                                       'refresh_token': 'aSBe7wAAdx88QTbwut0tiu3SYic3ox8F'})
+        self.assertEqual(response.status_code, 400)
+
     def test_delete(self):
         self.client.delete('/api/qt-access/{}'.format(self.qt_access.id))
         self.assertEqual(len(QTAccess.objects.all()), 0)
