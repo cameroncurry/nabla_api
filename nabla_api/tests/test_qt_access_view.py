@@ -54,7 +54,6 @@ class TestQTAccessView(APITestCase):
         }
         response = self.client.post('/api/qt-access', data)
         qt_access = QTAccess.objects.get(pk=response.data['id'])
-        print(qt_access.scope)
         expected_response = (
             (response.status_code, 201),
             (response.data['scope'], 'ACC'),
