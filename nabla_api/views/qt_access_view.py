@@ -6,18 +6,13 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import status
 from rest_framework import mixins
-from rest_framework.generics import ListAPIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 from nabla_core.models import QTAccess
-from nabla_core.models import QTAccount
-from nabla_core.models import QTActivity
 from nabla_core.questrade_support import QTAccessService
 
-from .serializers.questrade import QTAccountSerializer
-from .serializers.questrade import QTAccessSerializer
-from .serializers.questrade import QTActivitySerializer
+from ..serializers.questrade import QTAccessSerializer
 
 
 class QTAccessView(GenericAPIView,
@@ -66,19 +61,3 @@ class QTAccessView(GenericAPIView,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-
-
-class QTAccountView(ListAPIView):
-
-    queryset = QTAccount.objects.all()
-    serializer_class = QTAccountSerializer
-
-
-class QTActivityView(ListAPIView):
-
-    queryset = QTActivity.objects.all()
-    serializer_class = QTActivitySerializer
-
-
-
-
