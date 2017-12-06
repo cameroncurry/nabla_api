@@ -10,6 +10,7 @@ from ..serializers.questrade import QTAccountSerializer
 from ..serializers.questrade import QTActivitySerializer
 
 from .qt_access_view import QTAccessView
+from .qt_balance_view import QTBalanceView
 
 
 class QTAccountView(ListAPIView):
